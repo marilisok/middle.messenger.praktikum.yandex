@@ -1,0 +1,26 @@
+{
+  "name": "middle.messenger.praktikum.yandex",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "node ./server.js",
+    "dev": "parcel ./static/index.html --no-cache"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/marilisok/middle.messenger.praktikum.yandex.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "handlebars": "4.7.7",
+    "scss": "0.2.4",
+    "express": "4.18.2"
+  },
+  "devDependencies": {
+    "@anikin/parcel-transformer-handlebars": "1.0.9",
+    "@anikin/parcel-transformer-handlebars-precompile": "1.0.1",
+    "@parcel/transformer-sass": "2.8.3",
+    "parcel": "2.8.3"
+  }
+}

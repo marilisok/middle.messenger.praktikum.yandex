@@ -1,0 +1,42 @@
+.chat-item{
+    border-top: 1px solid $gray-border-color;
+    padding: 10px;
+    display: flex;
+}
+
+.message-avatar-wrapper{
+    width: 25%;
+}
+
+.name{
+    font-weight: bold;
+}
+
+.message-count{
+    height: 15px;
+    width: 15px;
+    background-color: $light-gray;
+    border-radius: 50%;
+    background: $blue;
+    color: $white;
+    text-align: center;
+    font-size: 11px;
+    align-self: end;
+}
+
+.chat-message-wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    gap: 5px;
+}
+
+.chat-info-wrapper{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.message, .message-time{
+    color: $gray;
+}

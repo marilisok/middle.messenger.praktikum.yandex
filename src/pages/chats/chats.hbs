@@ -1,0 +1,14 @@
+<div class="flex-row">
+    <div class="chats-list">
+        <div>
+            {{> button className='gray-link profile-button' label='Профиль >' click="goToPage('profile')"}}
+        </div>
+        <div class="search-button-wrapper">
+            {{> input className='gray-input' placeholder='Поиск' type='text'}}
+        </div>
+        {{> chat-item}}
+    </div>
+    <div class="chat-side">
+        Выберите чат, чтобы отправить сообщение
+    </div>
+</div>

@@ -1,0 +1,24 @@
+.chats-list{
+    width:23%;
+    background: $gray-background;
+    height: 100%;
+    border-right: 1px solid $gray-border-color;
+}
+
+.chat-side{
+    width: 77%;
+    color: $gray;
+    text-align: center;
+}
+
+.profile-button{
+    width: 100%;
+    text-align: end;
+    padding-top: 20px;
+    padding-right: 15px;
+    background: $gray-background;
+}
+
+.search-button-wrapper{
+    margin: 10px;
+}

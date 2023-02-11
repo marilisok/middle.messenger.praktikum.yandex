@@ -1,0 +1,10 @@
+<div class="profile-item">
+    <div>{{text}}</div>
+    <div class="profile-value">
+        {{#if changeMode}}
+            {{> input className='color-input-base' placeholder=placeholder type=type name=name value=value}}
+        {{else}}
+            {{value}}  
+        {{/if}}
+    </div>
+</div>

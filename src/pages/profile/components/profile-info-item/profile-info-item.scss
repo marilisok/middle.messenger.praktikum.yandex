@@ -1,0 +1,14 @@
+.profile-item{
+    display: flex;
+    border-bottom: 1px solid $gray-border-color;
+    padding-bottom: 5px;
+    width: 510px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile-value{
+    color: $gray;
+    width: 45%;
+    text-align: end;
+}

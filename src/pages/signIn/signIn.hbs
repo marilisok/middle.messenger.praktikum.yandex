@@ -1,0 +1,16 @@
+<div class="flex-wrapper">
+    <div class="form signIn-form">
+        <div class="title">Регистрация</div>
+        <div>{{> input className='form-input' placeholder='Почта' type='email' name='email'}}</div>
+        <div>{{> input className='form-input' placeholder='Логин' type='text' name='login'}}</div>
+        <div>{{> input className='form-input' placeholder='Имя' type='text' name='first_name'}}</div>
+        <div>{{> input className='form-input' placeholder='Фамилия' type='text' name='second_name'}}</div>
+        <div>{{> input className='form-input' placeholder='Телефон' type='tel' name='phone'}}</div>
+        <div>{{> input className='form-input' placeholder='Пароль' type='password' name='password'}}</div>
+        <div>{{> input className='form-input' placeholder='Пароль (ещё раз)' type='password' name='password_repeat'}}</div>
+        <div class="form-buttons-aligment">
+            {{> button className='primary' label='Зарегистрироваться' click="goToPage('chats')"}}
+            {{> button className='link' label='Войти' click="goToPage('logIn')"}}
+        </div>
+    </div>
+</div>

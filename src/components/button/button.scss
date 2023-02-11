@@ -1,0 +1,43 @@
+.common{
+    color: $white;
+    background: $blue;
+    border: none;
+    cursor: pointer;
+}
+
+.primary{
+    @extend .common;
+    width: 280px;
+    height: 37px;
+    border-radius: 8px;
+}
+
+.link-base{
+    cursor: pointer;
+    border: none;
+    background: $white;
+    font-weight: 500;
+    width: 280px;
+}
+
+.link{
+    @extend .link-base;
+    color: $blue;
+}
+
+.red-link{
+    @extend .link-base;
+    color: $red;
+}
+
+.gray-link{
+    @extend .link-base;
+    color: $gray;
+}
+
+.dot{
+    @extend .common;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
