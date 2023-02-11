@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "node ./server.js",
-    "build": "parcel build ./static/index.html --no-cache"
+    "dev": "parcel ./static/index.html --port 3000 --no-cache",
+    "build": "parcel build ./static/index.html --no-cache",
+    "start": "node ./server.js"
   },
   "repository": {
     "type": "git",
