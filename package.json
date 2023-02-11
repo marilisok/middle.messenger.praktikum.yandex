@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start": "node ./server.js",
-    "build": "parcel ./static/index.html --no-cache"
+    "build": "parcel build ./static/index.html --no-cache"
   },
   "repository": {
     "type": "git",
