@@ -8,7 +8,7 @@
 
 ## Спринт 1
 
-- Свёрстан макет приложения чат в Figma. Ссылка на макет
+- Свёрстан макет приложения чат в Figma. [Ссылка на макет](https://www.figma.com/file/DQjQTSdA6jVBhpXkuGjBkl/chat?node-id=0%3A1&t=3iFLkz13wK9Cdkph-0)
 - Настроена сборка с использованием Parcel и раздача статики сервером на Express.
 - Свёрстаны основные страницы приложения с использованием шаблонизатора Handlebars.
 - Приложение автоматически деплоится на Netlify из ветки deploy. [Ссылка на приложение](https://deploy--ubiquitous-semolina-b24042.netlify.app/)
