@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "parcel ./static/index.html --port 3000 --no-cache",
     "build": "parcel build ./static/index.html --no-cache",
-    "start": "node server.js"
+    "server": "node server.js",
+    "start": "npm run build && npm run server"
   },
   "repository": {
     "type": "git",
