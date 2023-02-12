@@ -1,0 +1,22 @@
+.back{
+    width: 6%;
+    background: $gray-background;
+    border-right: 1px solid $gray-border-color;
+}
+
+.user-name{
+    font-weight: bold;
+    text-align: center;
+}
+
+.profile-info{
+    width: 94%;
+}
+
+.profile-fields{
+    height: 40%;
+}
+
+.avatar-wrapper{
+    height: 35%;
+}
