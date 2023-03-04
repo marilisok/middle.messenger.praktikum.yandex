@@ -1,1 +1,27 @@
-<input class='{{className}}' placeholder='{{placeholder}}' type='{{type}}' name='{{name}}' value='{{value}}'>
+<div class='validation-error'></div>
+{{#if isProfileMode}}
+  <div class='profile-item'>
+    <div>{{text}}</div>
+    <div class="profile-value">
+      <input 
+        class='{{className}}'
+        placeholder='{{placeholder}}'
+        type='{{type}}'
+        name='{{name}}'
+        value='{{value}}'
+      >
+    </div>
+  </div>
+{{else}}
+  <div>
+    <input 
+      class='{{className}}'
+      placeholder='{{placeholder}}'
+      type='{{type}}'
+      name='{{name}}'
+      value='{{value}}'
+    >
+  </div>
+{{/if}}
+
+

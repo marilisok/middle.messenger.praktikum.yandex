@@ -1,11 +1,6 @@
-<div class="flex-wrapper">
-    <div class="form logIn-form">
-        <div class="title">Вход</div>
-        <div>{{> input className='form-input' placeholder='Логин' type='text' name='login'}}</div>
-        <div>{{> input className='form-input' placeholder='Пароль' type='password' name='password'}}</div>
-        <div class="form-buttons-aligment">
-            {{> button className='primary' label='Авторизоваться' click="goToPage('chats')"}}
-            {{> button className='link' label='Нет аккаунта?' click="goToPage('signIn')"}}
-        </div>
+<div class="form logIn-form">
+    <div class="title">{{title}}</div>
+        {{{form}}}
     </div>
 </div>
+

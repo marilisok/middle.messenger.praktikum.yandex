@@ -1,14 +1,30 @@
-<div class="flex-row">
-    <div class="chats-list">
-        <div>
-            {{> button className='gray-link profile-button' label='Профиль >' click="goToPage('profile')"}}
-        </div>
-        <div class="search-button-wrapper">
-            {{> input className='gray-input' placeholder='Поиск' type='text'}}
-        </div>
-        {{> chat-item}}
+{{{menuList}}}
+{{{attachList}}}
+<div class="chats-list">
+    <div>
+        {{{profileButton}}}
+    </div>
+    <div class="search-button-wrapper">
+        {{{searchInput}}}
+    </div>
+    {{{chatItems}}}
     </div>
     <div class="chat-side">
-        Выберите чат, чтобы отправить сообщение
+        <div class="chat-menu">
+            <div class="flex-row">
+                <div class="menu-avatar">{{{avatar}}}</div>
+                <div class="name">{{{name}}}</div>
+            </div>
+            {{{menuButton}}}
+        </div>
+        <div class="chat-dialog">
+            <div class="dialog-time">{{{dialogTime}}}</div>
+            {{{messages}}}
+        </div>
+        <div class="chat-message">
+            <div>{{{attachmentButton}}}</div>
+            <div class="message-input-wrapper">{{{messageInput}}}</div>
+            <div>{{{sendMessageButton}}}</div>
+        </div>
     </div>
 </div>
