@@ -8,7 +8,7 @@
 
 ## Ссылка на приложение
 
-[Netlify](https://www.figma.com/file/DQjQTSdA6jVBhpXkuGjBkl/chat?node-id=0%3A1&t=3iFLkz13wK9Cdkph-0)
+[Netlify](https://6402ab4cac95be551d619da6--ubiquitous-semolina-b24042.netlify.app/)
 
 ## Спринт 1
 
