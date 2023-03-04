@@ -6,6 +6,7 @@
 }
 
 .chat-side{
+    height: 100%;
     width: 77%;
     color: $gray;
     text-align: center;
@@ -21,4 +22,34 @@
 
 .search-button-wrapper{
     margin: 10px;
+}
+
+.chat-menu{
+    display: flex;
+    height: 8%;
+    border-bottom: 1px solid $gray-border-color;
+    justify-content: space-between;
+}
+
+.chat-message{
+    min-height: 15%;
+    border-top: 1px solid $gray-border-color ;
+    display: flex;
+    align-items: center;
+}
+
+.chat-dialog{
+    height: 77%;
+}
+
+.dialog-time{
+    margin: 20px;
+}
+
+.menu-avatar{
+    margin: 10px;
+}
+
+.message-input-wrapper{
+    width: 97%;
 }

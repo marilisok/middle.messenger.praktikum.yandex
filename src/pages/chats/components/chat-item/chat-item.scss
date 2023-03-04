@@ -9,13 +9,13 @@
 }
 
 .name{
+    color: $black;
     font-weight: bold;
 }
 
 .message-count{
     height: 15px;
     width: 15px;
-    background-color: $light-gray;
     border-radius: 50%;
     background: $blue;
     color: $white;

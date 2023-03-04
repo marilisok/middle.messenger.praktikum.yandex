@@ -1,0 +1,25 @@
+{
+    "extends": [
+        "stylelint-config-standard",
+        "stylelint-config-standard-scss"
+    ],
+    "rules": {
+        "selector-class-pattern": null,
+        "selector-pseudo-element-colon-notation":null,
+        "no-descending-specificity":null,
+        "scss/at-import-partial-extension": null,
+        "scss/at-extend-no-missing-placeholder": null 
+    },
+    "ignoreFiles": [
+      "dist/*",
+      "README.md",
+      "netlify.toml",
+      "package-lock.json",
+      "package.json",
+      "tsconfig.json",
+      "static/images/*",
+      "**/*.html",
+      "**/*.hbs",
+      "**/*.ts"
+    ]
+  }
