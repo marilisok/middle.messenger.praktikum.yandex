@@ -71,10 +71,34 @@ class Block<Props extends object> {
   _addEvents() {
     const {events = {}} = this.props as { events: Record<string, () =>void> };
 
-    Object.keys(events).forEach((eventName) => {
-      this._element?.addEventListener(eventName, events[eventName]);
+    Object.entries(events).forEach(([event, listener]) => {
+      this._element?.addEventListener(event, listener);
     });
   }
+
+  _removeEvents() {
+    const {events} = this.props as Record<string, () => void>;
+    if (events) {
+      Object.entries(events).forEach(([event, listener]) => {
+        this._element?.removeEventListener(event, listener);
+      });
+    }
+  }
+
+  _addAttributes() {
+    const {attr = {}} = this.props as Record<string, string>;
+
+    if ( attr ) {
+      Object.entries(attr).forEach(([key, value]) => {
+        this._element!.setAttribute(key, value as string);
+      });
+    }
+  }
+
+  removeAttribute(attrName: string) {
+    this._element!.removeAttribute(attrName);
+  }
+
 
   _registerEvents(eventBus: EventBus) {
     eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
@@ -151,12 +175,14 @@ class Block<Props extends object> {
 
   private _render() {
     const fragment = this.render();
+    this._removeEvents();
 
     this._element!.innerHTML = '';
 
     this._element!.append(fragment);
 
     this._addEvents();
+    this._addAttributes();
   }
 
   protected compile(template: (context: any) => string, context: any) {

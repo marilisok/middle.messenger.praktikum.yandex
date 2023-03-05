@@ -5,7 +5,9 @@ interface ButtonProps {
   label?: string;
   className: string[] | string;
   img?: string;
-  type?: string;
+  attr?: {
+    type?: string;
+  }
   events?: {
     click: (event?: any) => void;
   };
@@ -24,7 +26,7 @@ export class Button extends Block<ButtonProps> {
         element?.classList.add(item);
       });
     } else {
-      this.element?.classList.add(this.props?.className);
+      this.element?.classList.add(this.props?.className as string);
     }
   }
 

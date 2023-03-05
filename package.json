@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "parcel ./static/index.html --port 3000 --no-cache",
+    "dev": "parcel ./static/index.html --open --port 3000 --no-cache",
     "build": "parcel build ./static/index.html --no-cache",
     "server": "node server.ts",
     "start": "npm run build && npm run server"

@@ -1,6 +1,6 @@
 import template from './change-password.hbs';
 import Block from '../../../../utils/Block';
-import {Input} from '../../../../components/input/input';
+import {InputContainer} from '../../../../components/input/inputContainer';
 import {FieldsName} from '../../../../utils/FieldsName';
 import {Button} from '../../../../components/button/button';
 import {Form} from '../../../../components/form/form';
@@ -11,25 +11,23 @@ export class ChangePassword extends Block<any> {
   }
 
   init() {
-    const oldPassword = new Input({
+    const oldPassword = new InputContainer({
       text: 'Старый пароль',
       isProfileMode: true,
       className: 'color-input-base',
       placeholder: 'Старый пароль',
       type: 'password',
       name: FieldsName.OLD_PASSWORD,
-
     });
-    const newPassword = new Input({
+    const newPassword = new InputContainer({
       text: 'Новый пароль',
       isProfileMode: true,
       className: 'color-input-base',
       placeholder: 'Новый пароль',
       type: 'password',
       name: FieldsName.NEW_PASSWORD,
-
     });
-    const repeatPassword = new Input({
+    const repeatPassword = new InputContainer({
       text: 'Повторите новый пароль',
       isProfileMode: true,
       className: 'color-input-base',
@@ -41,7 +39,9 @@ export class ChangePassword extends Block<any> {
     const saveButton = new Button({
       label: 'Сохранить',
       className: 'primary',
-      type: 'submit',
+      attr: {
+        type: 'submit',
+      },
     });
 
     const form = new Form({

@@ -1,6 +1,6 @@
 import {Avatar} from '../../components/avatar/avatar';
 import {Button} from '../../components/button/button';
-import {Input} from '../../components/input/input';
+import {InputContainer} from '../../components/input/inputContainer';
 import Block from '../../utils/Block';
 import template from './chats.hbs';
 import {ChatItem} from './components/chat-item/chat-item';
@@ -10,7 +10,7 @@ import {Message} from './components/message/message';
 interface ChatsPageProps {
   chatItems: ChatItem[];
   messages: Message[];
-  searchInput: Input;
+  searchInput: InputContainer;
   profileButton: Button;
   menuButton: Button;
   attachmentButton: Button;
@@ -20,7 +20,7 @@ interface ChatsPageProps {
   attachList: DropDownList;
   avatar: Avatar;
   name: string;
-  messageInput: Input;
+  messageInput: InputContainer;
 }
 
 export class ChatsPage extends Block<ChatsPageProps> {
