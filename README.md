@@ -8,7 +8,7 @@
 
 ## Ссылка на приложение
 
-[Netlify](https://6402ab4cac95be551d619da6--ubiquitous-semolina-b24042.netlify.app/)
+[Netlify](https://ubiquitous-semolina-b24042.netlify.app/)
 
 ## Спринт 1
 
