@@ -24,7 +24,11 @@ export class Button extends Block<ButtonProps> {
         element?.classList.add(item);
       });
     } else {
-      this.element?.classList.add(this.props?.className);
+      this.element?.classList.add(this.props?.className as string);
+    }
+
+    if (this.props.type) {
+      this.element?.setAttribute('type', this.props.type);
     }
   }
 

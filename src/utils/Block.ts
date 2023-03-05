@@ -78,10 +78,11 @@ class Block<Props extends object> {
 
   _removeEvents() {
     const {events} = this.props as Record<string, () => void>;
-
-    Object.entries(events).forEach(([event, listener]) => {
-      this._element?.removeEventListener(event, listener);
-    });
+    if (events) {
+      Object.entries(events).forEach(([event, listener]) => {
+        this._element?.removeEventListener(event, listener);
+      });
+    }
   }
 
   _registerEvents(eventBus: EventBus) {
