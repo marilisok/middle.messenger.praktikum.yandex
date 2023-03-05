@@ -4,7 +4,7 @@ import Block from '../../utils/Block';
 
 export class MainPage extends Block<any> {
   constructor() {
-    super('div');
+    super('nav');
   }
 
   init() {

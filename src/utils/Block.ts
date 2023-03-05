@@ -71,8 +71,16 @@ class Block<Props extends object> {
   _addEvents() {
     const {events = {}} = this.props as { events: Record<string, () =>void> };
 
-    Object.keys(events).forEach((eventName) => {
-      this._element?.addEventListener(eventName, events[eventName]);
+    Object.entries(events).forEach(([event, listener]) => {
+      this._element?.addEventListener(event, listener);
+    });
+  }
+
+  _removeEvents() {
+    const {events} = this.props as Record<string, () => void>;
+
+    Object.entries(events).forEach(([event, listener]) => {
+      this._element?.removeEventListener(event, listener);
     });
   }
 
@@ -151,6 +159,7 @@ class Block<Props extends object> {
 
   private _render() {
     const fragment = this.render();
+    this._removeEvents();
 
     this._element!.innerHTML = '';
 
