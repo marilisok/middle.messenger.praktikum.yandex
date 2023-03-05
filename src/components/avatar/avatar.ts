@@ -15,3 +15,4 @@ export class Avatar extends Block<AvatarProps> {
     return this.compile(template, this.props);
   }
 }
+
