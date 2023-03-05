@@ -1,18 +1,18 @@
 import {Button} from '../../components/button/button';
 import {Form} from '../../components/form/form';
-import {Input} from '../../components/input/input';
+import {InputContainer} from '../../components/input/inputContainer';
 import {LogInPage} from './logIn';
 import {FieldsName} from '../../utils/FieldsName';
 
 export const logInContainer = () => {
-  const loginInput = new Input({
+  const loginInput = new InputContainer({
     className: 'form-input',
     placeholder: 'Логин',
     type: 'text',
     name: FieldsName.LOGIN,
   });
 
-  const passwordInput = new Input({
+  const passwordInput = new InputContainer({
     className: 'form-input',
     placeholder: 'Пароль',
     type: 'password',
@@ -22,7 +22,9 @@ export const logInContainer = () => {
   const signInButton = new Button({
     label: 'Авторизоваться',
     className: 'primary',
-    type: 'submit',
+    attr: {
+      type: 'submit',
+    },
   });
 
   const logInButton = new Button({

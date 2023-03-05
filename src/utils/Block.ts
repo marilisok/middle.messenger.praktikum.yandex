@@ -85,6 +85,21 @@ class Block<Props extends object> {
     }
   }
 
+  _addAttributes() {
+    const {attr = {}} = this.props as Record<string, string>;
+
+    if ( attr ) {
+      Object.entries(attr).forEach(([key, value]) => {
+        this._element!.setAttribute(key, value as string);
+      });
+    }
+  }
+
+  removeAttribute(attrName: string) {
+    this._element!.removeAttribute(attrName);
+  }
+
+
   _registerEvents(eventBus: EventBus) {
     eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
@@ -167,6 +182,7 @@ class Block<Props extends object> {
     this._element!.append(fragment);
 
     this._addEvents();
+    this._addAttributes();
   }
 
   protected compile(template: (context: any) => string, context: any) {

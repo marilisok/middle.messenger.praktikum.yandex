@@ -1,11 +1,11 @@
 import template from './form.hbs';
 import Block from '../../utils/Block';
-import {Input} from '../input/input';
+import {InputContainer} from '../input/inputContainer';
 import {Button} from '../button/button';
 import {validationForm} from '../../utils/ValidationForm';
 
 interface FormProps {
-  inputs: Input[];
+  inputs: InputContainer[];
   buttons: Button[];
   events: {
     submit: (event: SubmitEvent) => void;

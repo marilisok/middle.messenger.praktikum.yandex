@@ -1,53 +1,53 @@
 import {Button} from '../../components/button/button';
 import {Form} from '../../components/form/form';
-import {Input} from '../../components/input/input';
+import {InputContainer} from '../../components/input/inputContainer';
 import {SignInPage} from './signIn';
 import {FieldsName} from '../../utils/FieldsName';
 
 export const signInContainer = () => {
-  const emailInput = new Input({
+  const emailInput = new InputContainer({
     className: 'form-input',
     placeholder: 'Почта',
     type: 'email',
     name: FieldsName.EMAIL,
   });
 
-  const loginInput = new Input({
+  const loginInput = new InputContainer({
     className: 'form-input',
     placeholder: 'Логин',
     type: 'text',
     name: FieldsName.LOGIN,
   });
 
-  const nameInput = new Input({
+  const nameInput = new InputContainer({
     className: 'form-input',
     placeholder: 'Имя',
     type: 'text',
     name: FieldsName.FIRST_NAME,
   });
 
-  const surnameInput = new Input({
+  const surnameInput = new InputContainer({
     className: 'form-input',
     placeholder: 'Фамилия',
     type: 'text',
     name: FieldsName.SECOND_NAME,
   });
 
-  const phoneInput = new Input({
+  const phoneInput = new InputContainer({
     className: 'form-input',
     placeholder: 'Телефон',
     type: 'tel',
     name: FieldsName.PHONE,
   });
 
-  const passwordInput = new Input({
+  const passwordInput = new InputContainer({
     className: 'form-input',
     placeholder: 'Пароль',
     type: 'password',
     name: FieldsName.PASSWORD,
   });
 
-  const passwordRepeatInput = new Input({
+  const passwordRepeatInput = new InputContainer({
     className: 'form-input',
     placeholder: 'Пароль (ещё раз)',
     type: 'password',
@@ -57,7 +57,9 @@ export const signInContainer = () => {
   const signInButton = new Button({
     label: 'Зарегистрироваться',
     className: 'primary',
-    type: 'submit',
+    attr: {
+      type: 'submit',
+    },
   });
   const logInButton = new Button({
     label: 'Войти',
@@ -68,7 +70,15 @@ export const signInContainer = () => {
   });
 
   const form = new Form({
-    inputs: [emailInput, loginInput, nameInput, surnameInput, phoneInput, passwordInput, passwordRepeatInput],
+    inputs: [
+      emailInput,
+      loginInput,
+      nameInput,
+      surnameInput,
+      phoneInput,
+      passwordInput,
+      passwordRepeatInput,
+    ],
     buttons: [signInButton, logInButton],
     events: {
       submit: (event) => {

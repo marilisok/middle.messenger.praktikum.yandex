@@ -30,7 +30,9 @@ export const profileContainer = () => {
   const saveButton = new Button({
     label: 'Сохранить',
     className: 'primary',
-    type: 'submit',
+    attr: {
+      type: 'submit',
+    },
   });
 
   const profileForm = new Form({

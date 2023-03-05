@@ -1,13 +1,13 @@
 import Block from '../../utils/Block';
 import {FieldsName} from '../../utils/FieldsName';
 import {Button} from '../button/button';
-import {Input} from '../input/input';
+import {InputContainer} from '../input/inputContainer';
 import template from './popup.hbs';
 
-interface PopUpProps{
-    button: Button;
-    text: string;
-    closeButton: Button;
+interface PopUpProps {
+  button: Button;
+  text: string;
+  closeButton: Button;
 }
 
 export class PopUp extends Block<PopUpProps> {
@@ -18,7 +18,7 @@ export class PopUp extends Block<PopUpProps> {
   init() {
     this.element?.classList.add('modal');
     this.hide();
-    this.children.login = new Input({
+    this.children.login = new InputContainer({
       className: 'form-input',
       placeholder: 'Логин',
       type: 'text',

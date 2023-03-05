@@ -1,5 +1,5 @@
 import {Button} from '../../components/button/button';
-import {Input} from '../../components/input/input';
+import {InputContainer} from '../../components/input/inputContainer';
 import {ChatsPage} from './chats';
 import {ChatItem} from './components/chat-item/chat-item';
 import {Message} from './components/message/message';
@@ -20,7 +20,7 @@ export const chatsContainer = () => {
     className: 'small-avatar',
     src: avatarImg,
   });
-  const searchInput = new Input({
+  const searchInput = new InputContainer({
     className: 'gray-input',
     placeholder: 'Поиск',
     type: 'text',
@@ -82,7 +82,7 @@ export const chatsContainer = () => {
     className: 'my-message',
   });
 
-  const messageInput = new Input({
+  const messageInput = new InputContainer({
     className: 'gray-input',
     placeholder: 'Введите сообщение',
     type: 'text',
