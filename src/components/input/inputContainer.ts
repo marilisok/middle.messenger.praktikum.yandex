@@ -11,10 +11,6 @@ export interface InputContainerProps {
   value?: string;
   isProfileMode?: boolean;
   text?: string;
-  events?: {
-    blur?: () => void,
-    focus?: () => void,
-  };
 }
 
 export class InputContainer extends Block<InputContainerProps> {
@@ -33,26 +29,21 @@ export class InputContainer extends Block<InputContainerProps> {
         value: this.props?.value || '',
       },
       events: {
-        blur: this.props.events?.blur,
-        focus: this.props.events?.focus,
+        blur: () => this.validateInput(),
+        focus: () => this.validateInput(),
       },
     });
   }
 
-  _addEvents() {
+  validateInput() {
     const input = this.element?.querySelector('input');
-    const eventHandler = () => {
-      const key = input?.name;
-      const value = input?.value || '';
-      if (key) {
-        const result = validationForm(key, value);
-        const divForError = this.element?.querySelector('.validation-error');
-        divForError!.textContent = result;
-      }
-    };
-
-    input?.addEventListener('blur', eventHandler);
-    input?.addEventListener('focus', eventHandler);
+    const key = input?.name;
+    const value = input?.value || '';
+    if (key) {
+      const result = validationForm(key, value);
+      const divForError = this.element?.querySelector('.validation-error');
+      divForError!.textContent = result;
+    }
   }
 
   render() {
