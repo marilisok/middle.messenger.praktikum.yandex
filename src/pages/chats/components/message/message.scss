@@ -1,0 +1,31 @@
+.message{
+    height: fit-content;
+    max-width: 40%;
+    width: fit-content;
+    padding: 10px;
+    margin: 20px;
+    border-radius: 7px;
+    text-align: start;
+}
+
+.other-message{
+    @extend .message;
+
+    background: $gray-background-message;
+}
+
+.my-message{
+    @extend .message;
+
+    background: $blue-background-message;
+}
+
+.message-text{
+    color: black;
+}
+
+.message-time{
+    font-size: 12px;
+    text-align: end;
+    margin-top: 3px;
+}

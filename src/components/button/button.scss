@@ -7,6 +7,7 @@
 
 .primary{
     @extend .common;
+
     width: 280px;
     height: 37px;
     border-radius: 8px;
@@ -22,22 +23,48 @@
 
 .link{
     @extend .link-base;
+
     color: $blue;
 }
 
 .red-link{
     @extend .link-base;
+
     color: $red;
 }
 
 .gray-link{
     @extend .link-base;
+
     color: $gray;
 }
 
 .dot{
     @extend .common;
+
     height: 30px;
     width: 30px;
     border-radius: 50%;
 }
+
+.img-button{
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.close {
+    background: none;
+    border: none;
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }

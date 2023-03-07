@@ -1,76 +1,25 @@
-<div class="flex-row">
-    <div class="back flex-wrapper">
-        {{> button className='dot' label='<<' click="goToPage('chats')"}}
+<div class="back flex-wrapper">
+    {{{backToChatsButton}}}
+</div>
+<div class="flex-wrapper profile-info">
+    <div class="avatar-wrapper">
+        {{{avatar}}}
+        <div class="user-name">Name</div>
     </div>
-    <div class="flex-wrapper profile-info">
-        <div class="avatar-wrapper">
-            {{> avatar className='big-avatar' src=src}}
-            <div class="user-name">Name</div>
-        </div>
-        <div class="flex profile-fields">
-            {{#if changePassword}}
-                {{> change-password}}
-            {{else}}
-                {{> profile-info-item text='Почта'
-                    value='email@mail.ru'
-                    changeMode=changeProfileInfo
-                    placeholder='Почта'
-                    type='email'
-                    name='email'
-                }}
-                {{> profile-info-item
-                    text='Логин'
-                    value='Логин'
-                    changeMode=changeProfileInfo
-                    placeholder='Логин'
-                    type='text'
-                    name='login'
-                }}
-                {{> profile-info-item
-                    text='Имя' 
-                    value='Имя'
-                    changeMode=changeProfileInfo
-                    placeholder='Имя'
-                    type='text'
-                    name='first_name'
-                }}
-                {{> profile-info-item
-                    text='Фамилия'
-                    value='Фамилия'
-                    changeMode=changeProfileInfo
-                    placeholder='Фамилия'
-                    type='text'
-                    name='second_name'
-                }}
-                {{> profile-info-item
-                    text='Имя в чате'
-                    value='Имя в чате'
-                    changeMode=changeProfileInfo
-                    placeholder='Имя в чате'
-                    type='text'
-                    name='display_name'
-                }}
-                {{> profile-info-item 
-                    text='Телефон' 
-                    value='Телефон'
-                    changeMode=changeProfileInfo
-                    placeholder='Телефон'
-                    type='tel' 
-                    name='phone'
-                }}
+    <div class="flex profile-fields">
+        {{#if isProfileInfo}}
+            {{{profileInfoItems}}}
+        {{else if isChangePassword}}
+            {{{changePassword}}}
+        {{else}}
+             {{{profileForm}}} 
+        {{/if}}
+    </div>
+   
+        <div class="flex">
+            {{#if isProfileInfo}}
+                {{{buttons}}}
             {{/if}}
         </div>
-         <div class="flex">
-                {{#if changePassword }}
-                    {{> button className='primary' label='Сохранить' click="goToPage('profile')"}}
-                {{else if changeProfileInfo}}
-                    {{> button className='primary' label='Сохранить' click="goToPage('profile')"}}    
-                {{else}}
-                    {{> button className='link' label='Изменить данные' click="goToPage('profile', {changeProfileInfo: true})"}}
-                    {{> button className='link' label='Изменить пароль' click="goToPage('profile', {changePassword: true})"}}
-                    {{> button className='red-link' label='Выйти' click="goToPage('logIn')"}}
-                {{/if}}
-        </div>
-    </div>
+    
 </div>
-

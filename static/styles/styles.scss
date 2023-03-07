@@ -1,13 +1,17 @@
-@import './colors.scss';
-@import '../../src/components/button/button.scss';
-@import '../../src/components/avatar/avatar.scss';
-@import '../../src/components/input/input.scss';
-@import '../../src/pages/profile/components/profile-info-item/profile-info-item.scss';
-@import '../../src/pages/chats/components/chat-item/chat-item.scss';
-@import '../../src/pages/logIn/logIn.scss';
-@import '../../src/pages/signIn/signIn.scss';
-@import '../../src/pages/profile/profile.scss';
-@import '../../src/pages/chats/chats.scss';
+@import './colors';
+@import '../../src/components/button/button';
+@import '../../src/components/popup/popup';
+@import '../../src/components/avatar/avatar';
+@import '../../src/components/input/input';
+@import '../../src/components/input/inputContainer';
+@import '../../src/pages/profile/components/profile-info-item/profile-info-item';
+@import '../../src/pages/chats/components/chat-item/chat-item';
+@import '../../src/pages/chats/components/message/message';
+@import '../../src/pages/chats/components/dropdown-list/dropdown-list';
+@import '../../src/pages/logIn/logIn';
+@import '../../src/pages/signIn/signIn';
+@import '../../src/pages/profile/profile';
+@import '../../src/pages/chats/chats';
 
 #app{
     position: fixed;
@@ -35,25 +39,42 @@
 
 .flex-wrapper{
     @extend .flex;
+
     height: 100%;
 }
 
 .flex-row{
     @extend .flex-wrapper;
+
     flex-direction: row;
-    gap: 0px;
+    gap: 0;
+}
+
+.flex-row-wrapper{
+    @extend .flex;
+
+    flex-direction: row;
+    gap: 0;
 }
 
 .form{
     @extend .flex;
+
     width: 340px;
-    box-shadow: 0px 0px 6px rgb(0 0 0 / 14%);
+    box-shadow: 0 0 6px rgb(0 0 0 / 14%);
     border-radius: 12px;
 }
 
 .form-buttons-aligment{
     @extend .flex;
+
     justify-content: flex-end;
     margin-bottom: 30px;
     height: 100%;
+}
+
+.validation-error, .validation-error-form{
+    color: $red;
+    text-align: center;
+    font-size: 12px;
 }
