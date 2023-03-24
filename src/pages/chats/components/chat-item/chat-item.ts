@@ -1,5 +1,5 @@
 import {Avatar} from '../../../../components/avatar/avatar';
-import Block from '../../../../utils/Block';
+import Block from '../../../../services/Block';
 import template from './chat-item.hbs';
 import avatar from '../../../../../static/images/avatar.png';
 

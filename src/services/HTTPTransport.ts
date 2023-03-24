@@ -8,7 +8,7 @@ enum METHODS{
 type HTTPMethod = (
     url: string,
     options?:{
-        data?: Record<string, string | number>,
+        data?: any,
         headers?: Record<string, string>,
         timeout?: number
     }
@@ -34,23 +34,27 @@ function queryStringify<T>(data: Record<string, T>): string {
     return `${result}${key}=${data[key]}${index < keys.length - 1 ? '&' : ''}`;
   }, '?');
 }
+export class HTTPTransport {
+  protected endpoint: string;
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-class HTTPTransport {
+  constructor( endpoint: string ) {
+    this.endpoint = endpoint;
+  }
+
   get: HTTPMethod = (url, options = {}) => {
-    return this.request(url, {...options, method: METHODS.GET}, options.timeout);
+    return this.request(this.endpoint+url, {...options, method: METHODS.GET}, options.timeout);
   };
 
   post: HTTPMethod = (url, options = {}) => {
-    return this.request(url, {...options, method: METHODS.POST}, options.timeout);
+    return this.request(this.endpoint+url, {...options, method: METHODS.POST}, options.timeout);
   };
 
   put: HTTPMethod = (url, options = {}) => {
-    return this.request(url, {...options, method: METHODS.PUT}, options.timeout);
+    return this.request(this.endpoint+url, {...options, method: METHODS.PUT}, options.timeout);
   };
 
   delete: HTTPMethod = (url, options = {}) => {
-    return this.request(url, {...options, method: METHODS.DELETE}, options.timeout);
+    return this.request(this.endpoint+url, {...options, method: METHODS.DELETE}, options.timeout);
   };
 
   request: RequestMethod = (url, options = {}, timeout = 5000) => {
@@ -67,9 +71,9 @@ class HTTPTransport {
 
       xhr.open(method, isGet && !!data ? `${url}${queryStringify(data)}` : url);
 
-      Object.keys(headers).forEach((key) => {
-        xhr.setRequestHeader(key, headers[key]);
-      });
+      xhr.setRequestHeader('Content-Type', 'application/json');
+      xhr.withCredentials = true;
+      xhr.responseType = 'json';
 
       xhr.onload = function() {
         resolve(xhr);
@@ -84,7 +88,7 @@ class HTTPTransport {
       if (isGet || !data) {
         xhr.send();
       } else {
-        xhr.send(data);
+        xhr.send(JSON.stringify(data));
       }
     });
   };

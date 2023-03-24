@@ -1,5 +1,5 @@
 import template from './inputContainer.hbs';
-import Block from '../../utils/Block';
+import Block from '../../services/Block';
 import {validationForm} from '../../utils/ValidationForm';
 import {Input} from './input';
 
@@ -33,6 +33,10 @@ export class InputContainer extends Block<InputContainerProps> {
         focus: () => this.validateInput(),
       },
     });
+  }
+
+  get value() {
+    return this.children.input.value;
   }
 
   validateInput() {

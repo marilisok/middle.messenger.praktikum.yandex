@@ -1,5 +1,5 @@
 import template from './form.hbs';
-import Block from '../../utils/Block';
+import Block from '../../services/Block';
 import {InputContainer} from '../input/inputContainer';
 import {Button} from '../button/button';
 import {validationForm} from '../../utils/ValidationForm';
@@ -34,6 +34,9 @@ export class Form extends Block<FormProps> {
   }
 
   getForm() {
+    this.children.inputs.forEach((element) => {
+      console.log(element.value);
+    });
     const inputs = Array.from(this.element!.querySelectorAll('input'));
     const formObj = inputs?.reduce((result, item) => {
       const key = item.name;

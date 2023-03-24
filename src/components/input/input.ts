@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../services/Block';
 import template from './input.hbs';
 export interface InputProps {
   attr: {
@@ -7,10 +7,10 @@ export interface InputProps {
     type: string;
     name?: string;
     value?: string;
-  },
+  };
   events?: {
-    blur?: () => void,
-    focus?: () => void,
+    blur?: () => void;
+    focus?: () => void;
   };
 }
 export class Input extends Block<InputProps> {
@@ -18,9 +18,11 @@ export class Input extends Block<InputProps> {
     super('input', props);
   }
 
+  get value() {
+    return this.element!.value;
+  }
+
   render() {
     return this.compile(template, this.props);
   }
 }
-
-

@@ -1,7 +1,7 @@
 import {Avatar} from '../../components/avatar/avatar';
 import {Button} from '../../components/button/button';
 import {InputContainer} from '../../components/input/inputContainer';
-import Block from '../../utils/Block';
+import Block from '../../services/Block';
 import template from './chats.hbs';
 import {ChatItem} from './components/chat-item/chat-item';
 import {DropDownList} from './components/dropdown-list/dropdown-list';
@@ -30,6 +30,10 @@ export class ChatsPage extends Block<ChatsPageProps> {
 
   init() {
     this.element?.classList.add('flex-row');
+  }
+
+  show() {
+    this.getContent()!.style.display = 'flex';
   }
 
   render() {

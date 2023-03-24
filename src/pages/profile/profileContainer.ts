@@ -6,6 +6,9 @@ import {ProfilePage} from './profile';
 import {Form} from '../../components/form/form';
 import {profileInfoItems} from './profile-info-items';
 import {profileItemInputs} from './profile-item-inputs';
+import {router} from '../../services/Router';
+import AuthController from '../../controllers/AuthController';
+import ProfileController from '../../controllers/ProfileController';
 
 export const profileContainer = () => {
   const buttons = [];
@@ -16,7 +19,7 @@ export const profileContainer = () => {
     className: 'dot',
     label: '<<',
     events: {
-      click: () => window.location.replace('chats'),
+      click: () => router.go('/messenger'),
     },
   });
 
@@ -42,10 +45,13 @@ export const profileContainer = () => {
       submit: (event) => {
         event.preventDefault();
         const formObj = profileForm.getForm();
-        console.log(formObj);
         const isFormInValid = profileForm.isFormInValid();
+        console.log(formObj);
+        console.log(isFormInValid);
         if (!isFormInValid) {
-          window.location.replace('profile');
+          console.log(formObj);
+          // ProfileController.changeUserProfile(formObj);
+          router.go('/settings');
         }
       },
     },
@@ -83,11 +89,10 @@ export const profileContainer = () => {
     label: 'Выйти',
     className: 'red-link',
     events: {
-      click: () => window.location.replace('logIn'),
+      click: () => AuthController.logOut(),
     },
   });
   buttons.push(changeDataButton, changePasswordButton, exitButton);
-
 
   const profile = new ProfilePage({
     avatar: avatar,

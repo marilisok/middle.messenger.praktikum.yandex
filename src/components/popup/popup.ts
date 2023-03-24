@@ -1,4 +1,4 @@
-import Block from '../../utils/Block';
+import Block from '../../services/Block';
 import {FieldsName} from '../../utils/FieldsName';
 import {Button} from '../button/button';
 import {InputContainer} from '../input/inputContainer';

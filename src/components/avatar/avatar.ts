@@ -1,5 +1,5 @@
 import template from './avatar.hbs';
-import Block from '../../utils/Block';
+import Block from '../../services/Block';
 
 interface AvatarProps {
   src: string;
@@ -15,4 +15,3 @@ export class Avatar extends Block<AvatarProps> {
     return this.compile(template, this.props);
   }
 }
-

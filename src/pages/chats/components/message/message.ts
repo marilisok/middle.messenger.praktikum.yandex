@@ -1,10 +1,10 @@
-import Block from '../../../../utils/Block';
+import Block from '../../../../services/Block';
 import template from './message.hbs';
 
-interface MessageProps{
-    text: string;
-    time: string;
-    className: string;
+interface MessageProps {
+  text: string;
+  time: string;
+  className: string;
 }
 
 export class Message extends Block<MessageProps> {

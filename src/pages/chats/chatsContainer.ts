@@ -11,6 +11,7 @@ import {dropDownMenuList} from './components/dropdown-list/dropdown-menu-list';
 import {dropDownAttachList} from './components/dropdown-list/dropdown-attach-list';
 import {Avatar} from '../../components/avatar/avatar';
 import {FieldsName} from '../../utils/FieldsName';
+import {router} from '../../services/Router';
 
 export const chatsContainer = () => {
   const chatItem = new ChatItem();
@@ -30,7 +31,7 @@ export const chatsContainer = () => {
     label: 'Профиль >',
     className: ['gray-link', 'profile-button'],
     events: {
-      click: () => window.location.replace('profile'),
+      click: () => router.go('/settings'),
     },
   });
 

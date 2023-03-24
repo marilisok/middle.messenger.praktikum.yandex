@@ -1,9 +1,9 @@
 import {Button} from '../../../../components/button/button';
 import {PopUp} from '../../../../components/popup/popup';
-import Block from '../../../../utils/Block';
+import Block from '../../../../services/Block';
 import template from './dropdown-list.hbs';
 
-interface DropDownListeProps{
+interface DropDownListeProps {
   buttons: Button[];
   popups?: PopUp[];
 }
@@ -23,9 +23,9 @@ export class DropDownList extends Block<DropDownListeProps> {
     if (target) {
       const coords = target.getBoundingClientRect();
       const elementWidth = parseInt(getComputedStyle(this.element!).width);
-      let left = coords.left + coords.width/2 - elementWidth;
+      let left = coords.left + coords.width / 2 - elementWidth;
       if (left < 0) left = 0;
-      let top = coords.top - coords.height*2;
+      let top = coords.top - coords.height * 2;
       if (top < 0) {
         top = coords.top + coords.height;
       }
