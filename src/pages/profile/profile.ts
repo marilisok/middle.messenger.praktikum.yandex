@@ -46,7 +46,7 @@ class ProfilePageBase extends Block<ProfilePageProps> {
     }
 
     if (this.children.profileForm) {
-      debugger;
+      //debugger;
       const inputs = this.children.profileForm.children.inputs.map((element) => {
         const fieldName = element.props.name;
         return new InputContainer({
