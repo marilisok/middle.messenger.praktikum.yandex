@@ -6,6 +6,11 @@ import {ProfilePage} from './profile';
 import {Form} from '../../components/form/form';
 import {profileInfoItems} from './profile-info-items';
 import {profileItemInputs} from './profile-item-inputs';
+import {router} from '../../services/Router';
+import AuthController from '../../controllers/AuthController';
+import ProfileController from '../../controllers/ProfileController';
+import {PopUp} from '../../components/popup/popup';
+import {InputContainer} from '../../components/input/inputContainer';
 
 export const profileContainer = () => {
   const buttons = [];
@@ -16,13 +21,66 @@ export const profileContainer = () => {
     className: 'dot',
     label: '<<',
     events: {
-      click: () => window.location.replace('chats'),
+      click: () => router.go('/messenger'),
     },
+  });
+
+  const changeAvatarPopUpButton = new Button({
+    label: 'Изменить',
+    className: 'primary',
+    attr: {
+      type: 'submit',
+    },
+  });
+
+  const chooseAvatar = new InputContainer({
+    type: 'file',
+    name: 'avatar',
+    className: 'avatarInput',
+    accept: 'image/*',
+  });
+
+  const changeAvatarForm = new Form({
+    inputs: [chooseAvatar],
+    buttons: [changeAvatarPopUpButton],
+    events: {
+      submit: (event) => {
+        event.preventDefault();
+        const form = changeAvatarForm.getContent() as HTMLFormElement;
+        const formData = new FormData(form);
+        if (form.querySelector('.avatarInput').value) {
+          ProfileController.changeUserAvatar(formData);
+          form.querySelector('.avatarInput').value = '';
+          changeAvatarPopup.hide();
+        }
+      },
+    },
+  });
+
+  const closeAvatarPopUp = new Button({
+    label: '&times',
+    className: 'close',
+    events: {
+      click: () => {
+        changeAvatarPopup.hide();
+      },
+    },
+  });
+
+  const changeAvatarPopup = new PopUp({
+    text: 'Изменить аватар',
+    closeButton: closeAvatarPopUp,
+    item: changeAvatarForm,
   });
 
   const avatar = new Avatar({
     className: 'big-avatar',
     src: avatarSrc,
+    events: {
+      click: () => {
+        changeAvatarPopup.show();
+      },
+    },
   });
 
   const changePassword = new ChangePassword();
@@ -35,6 +93,18 @@ export const profileContainer = () => {
     },
   });
 
+  const backToProfileButton = new Button({
+    label: 'Назад',
+    className: 'link',
+    events: {
+      click: () => {
+        profile.setProps({
+          isProfileInfo: true,
+        });
+      },
+    },
+  });
+
   const profileForm = new Form({
     inputs: profileInputs,
     buttons: [saveButton],
@@ -42,10 +112,12 @@ export const profileContainer = () => {
       submit: (event) => {
         event.preventDefault();
         const formObj = profileForm.getForm();
-        console.log(formObj);
         const isFormInValid = profileForm.isFormInValid();
         if (!isFormInValid) {
-          window.location.replace('profile');
+          ProfileController.changeUserProfile(formObj);
+          profile.setProps({
+            isProfileInfo: true,
+          });
         }
       },
     },
@@ -73,7 +145,6 @@ export const profileContainer = () => {
           isChangePassword: true,
           isProfileInfo: false,
           changePassword: changePassword,
-          saveButton,
         });
       },
     },
@@ -83,11 +154,10 @@ export const profileContainer = () => {
     label: 'Выйти',
     className: 'red-link',
     events: {
-      click: () => window.location.replace('logIn'),
+      click: () => AuthController.logOut(),
     },
   });
   buttons.push(changeDataButton, changePasswordButton, exitButton);
-
 
   const profile = new ProfilePage({
     avatar: avatar,
@@ -95,6 +165,8 @@ export const profileContainer = () => {
     isProfileInfo: true,
     profileInfoItems: profileItems,
     buttons: buttons,
+    changeAvatarPopup: changeAvatarPopup,
+    backToProfileButton,
   });
 
   return profile;

@@ -1,9 +1,11 @@
 import template from './change-password.hbs';
-import Block from '../../../../utils/Block';
+import Block from '../../../../services/Block';
 import {InputContainer} from '../../../../components/input/inputContainer';
 import {FieldsName} from '../../../../utils/FieldsName';
 import {Button} from '../../../../components/button/button';
 import {Form} from '../../../../components/form/form';
+import {router} from '../../../../services/Router';
+import ProfileController from '../../../../controllers/ProfileController';
 
 export class ChangePassword extends Block<any> {
   constructor() {
@@ -51,10 +53,10 @@ export class ChangePassword extends Block<any> {
         submit: (event) => {
           event.preventDefault();
           const formObj = form.getForm();
-          console.log(formObj);
           const isFormInValid = form.isFormInValid();
           if (!isFormInValid) {
-            window.location.replace('profile');
+            ProfileController.changeUserPassword(formObj);
+            router.go('/settings');
           }
         },
       },

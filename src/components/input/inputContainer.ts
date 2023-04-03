@@ -1,16 +1,17 @@
 import template from './inputContainer.hbs';
-import Block from '../../utils/Block';
+import Block from '../../services/Block';
 import {validationForm} from '../../utils/ValidationForm';
 import {Input} from './input';
 
 export interface InputContainerProps {
-  placeholder: string;
+  placeholder?: string;
   className: string;
   type: string;
   name?: string;
   value?: string;
   isProfileMode?: boolean;
   text?: string;
+  accept?: string;
 }
 
 export class InputContainer extends Block<InputContainerProps> {
@@ -22,17 +23,31 @@ export class InputContainer extends Block<InputContainerProps> {
     this.element?.classList.add('input-wrapper');
     this.children.input = new Input({
       attr: {
-        placeholder: this.props.placeholder,
+        placeholder: this.props?.placeholder || '',
         class: this.props.className,
         type: this.props.type,
         name: this.props?.name,
         value: this.props?.value || '',
+        accept: this.props?.accept || '',
       },
       events: {
         blur: () => this.validateInput(),
         focus: () => this.validateInput(),
       },
     });
+  }
+
+  get value() {
+    return this.children.input.value;
+  }
+
+  protected componentDidUpdate(oldProps: InputContainerProps, newProps: InputContainerProps): boolean {
+    this.children.input.setProps({
+      attr: {
+        value: newProps.value,
+      },
+    });
+    return true;
   }
 
   validateInput() {

@@ -1,5 +1,6 @@
 import {Button} from '../../components/button/button';
-import Block from '../../utils/Block';
+import Block from '../../services/Block';
+import {router} from '../../services/Router';
 import template from './client-error.hbs';
 
 export class ClientErrorPage extends Block<any> {
@@ -13,7 +14,7 @@ export class ClientErrorPage extends Block<any> {
       label: 'Назад к чатам',
       className: 'link',
       events: {
-        click: () => window.location.replace('chats'),
+        click: () => router.go('/messenger'),
       },
     });
   }

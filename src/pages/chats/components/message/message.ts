@@ -1,13 +1,13 @@
-import Block from '../../../../utils/Block';
+import Block from '../../../../services/Block';
 import template from './message.hbs';
 
-interface MessageProps{
-    text: string;
-    time: string;
-    className: string;
+interface MessageProps {
+  content: string;
+  time: string;
+  className: string;
 }
 
-export class Message extends Block<MessageProps> {
+export class MessageItem extends Block<MessageProps> {
   constructor(props: MessageProps) {
     super('div', props);
   }

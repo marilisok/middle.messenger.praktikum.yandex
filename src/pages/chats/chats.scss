@@ -13,10 +13,6 @@
 }
 
 .profile-button{
-    width: 100%;
-    text-align: end;
-    padding-top: 20px;
-    padding-right: 15px;
     background: $gray-background;
 }
 
@@ -40,6 +36,7 @@
 
 .chat-dialog{
     height: 77%;
+    overflow: scroll;
 }
 
 .dialog-time{
@@ -52,4 +49,9 @@
 
 .message-input-wrapper{
     width: 97%;
+}
+
+.left-menu-buttons{
+    display: flex;
+    height: 8%;
 }

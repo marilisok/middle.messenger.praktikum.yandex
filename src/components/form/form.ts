@@ -1,5 +1,5 @@
 import template from './form.hbs';
-import Block from '../../utils/Block';
+import Block from '../../services/Block';
 import {InputContainer} from '../input/inputContainer';
 import {Button} from '../button/button';
 import {validationForm} from '../../utils/ValidationForm';

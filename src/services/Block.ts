@@ -1,3 +1,4 @@
+import {isEqual} from '../utils/isEqual';
 import {EventBus} from './EventBus';
 import {nanoid} from 'nanoid';
 
@@ -7,6 +8,7 @@ class Block<Props extends object> {
     FLOW_CDM: 'flow:component-did-mount',
     FLOW_CDU: 'flow:component-did-update',
     FLOW_RENDER: 'flow:render',
+    FLOW_CDUNM: 'flow:component-did-unmount',
   };
 
   public id = nanoid(6);
@@ -14,7 +16,7 @@ class Block<Props extends object> {
   public children: Record<string, Block<Props>> = {};
   private eventBus: () => EventBus;
   private _element: HTMLElement | null = null;
-  private _meta: { tagName: string; props: any; };
+  private _meta: { tagName: string; props: any };
 
   /** JSDoc
    * @param {string} tagName
@@ -27,13 +29,15 @@ class Block<Props extends object> {
 
     const {props, children} = this._getChildrenAndProps(propsWithChildren);
 
-
     this._meta = {
       tagName,
       props,
     };
 
-    this.children = this._makePropsProxy( children) as Record<string, Block<Props>>;
+    this.children = this._makePropsProxy(children) as Record<
+      string,
+      Block<Props>
+    >;
     this.props = this._makePropsProxy(props) as Props;
 
     this.eventBus = () => eventBus;
@@ -48,7 +52,11 @@ class Block<Props extends object> {
     const children: Record<string, T> = {};
 
     Object.entries(childrenAndProps).forEach(([key, value]) => {
-      if (Array.isArray(value) ) {
+      if (Array.isArray(value)) {
+        if (value.length === 0) {
+          props[key] = value;
+          children[key] = value;
+        }
         value.forEach((val) => {
           if (val instanceof Block) {
             children[key] = value;
@@ -56,7 +64,6 @@ class Block<Props extends object> {
             props[key] = value;
           }
         });
-        return;
       }
       if (value instanceof Block) {
         children[key] = value;
@@ -69,7 +76,9 @@ class Block<Props extends object> {
   }
 
   _addEvents() {
-    const {events = {}} = this.props as { events: Record<string, () =>void> };
+    const {events = {}} = this.props as {
+      events: Record<string, () => void>;
+    };
 
     Object.entries(events).forEach(([event, listener]) => {
       this._element?.addEventListener(event, listener);
@@ -88,7 +97,7 @@ class Block<Props extends object> {
   _addAttributes() {
     const {attr = {}} = this.props as Record<string, string>;
 
-    if ( attr ) {
+    if (attr) {
       Object.entries(attr).forEach(([key, value]) => {
         this._element!.setAttribute(key, value as string);
       });
@@ -99,12 +108,12 @@ class Block<Props extends object> {
     this._element!.removeAttribute(attrName);
   }
 
-
   _registerEvents(eventBus: EventBus) {
     eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_CDUNM, this._componentDidUnmount.bind(this));
   }
 
   _createResources() {
@@ -120,7 +129,6 @@ class Block<Props extends object> {
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
   }
 
-
   protected init() {
     return;
   }
@@ -135,11 +143,20 @@ class Block<Props extends object> {
 
   public dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
-
-    Object.values(this.children).forEach((child) => child.dispatchComponentDidMount());
+    Object.values(this.children).forEach((child) => {
+      if (child instanceof Block) {
+        child.dispatchComponentDidMount();
+      } else if (Array.isArray(child)) {
+        child.forEach((c) => {
+          if (child instanceof Block) {
+            c.dispatchComponentDidMount();
+          }
+        });
+      }
+    });
   }
 
-  private _componentDidUpdate(oldProps: Props, newProps: Props) {
+  _componentDidUpdate(oldProps: Props, newProps: Props) {
     if (this.componentDidUpdate(oldProps, newProps)) {
       this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
@@ -154,16 +171,20 @@ class Block<Props extends object> {
       return;
     }
 
-    const oldValue = (this.props);
+    const oldValue = this.props;
+
+    if (isEqual(oldValue, nextProps)) {
+      return;
+    }
 
     const {children, props} = this._getChildrenAndProps(nextProps);
 
     if (Object.values(children).length) {
-      Object.assign( this.children, children );
+      Object.assign(this.children, children);
     }
 
     if (Object.values(props).length) {
-      Object.assign( this.props, props );
+      Object.assign(this.props, props);
     }
 
     this.eventBus().emit(Block.EVENTS.FLOW_CDU, oldValue, this.props);
@@ -173,7 +194,7 @@ class Block<Props extends object> {
     return this._element;
   }
 
-  private _render() {
+  _render() {
     const fragment = this.render();
     this._removeEvents();
 
@@ -195,7 +216,6 @@ class Block<Props extends object> {
     const html = template(contextAndStubs);
 
     const temp = document.createElement('template');
-
     temp.innerHTML = html;
 
     Object.values(this.children).forEach((child) => {
@@ -226,15 +246,18 @@ class Block<Props extends object> {
     return this.element;
   }
 
-  _makePropsProxy<T>(props: Record<string, T>) {
-    return new Proxy( props, {
+  getProps() {
+    return this.props;
+  }
 
-      get( target, prop: string ) {
+  _makePropsProxy<T>(props: Record<string, T>) {
+    return new Proxy(props, {
+      get(target, prop: string) {
         const value = target[prop];
-        return typeof value === 'function' ? value.bind( target ) : value;
+        return typeof value === 'function' ? value.bind(target) : value;
       },
 
-      set( target, prop: string, value ) {
+      set(target, prop: string, value) {
         if (target[prop] !== value) {
           target[prop] = value;
         }
@@ -242,7 +265,7 @@ class Block<Props extends object> {
       },
 
       deleteProperty() {
-        throw new Error( 'Нет доступа' );
+        throw new Error('Нет доступа');
       },
     });
   }
@@ -261,6 +284,30 @@ class Block<Props extends object> {
 
   get styleDisplay() {
     return this.getContent()!.style.display;
+  }
+
+  private _componentDidUnmount() {
+    this.componentDidUnmount();
+  }
+
+  protected componentDidUnmount() {
+    return;
+  }
+
+  public dispatchComponentDidUnmount() {
+    this.eventBus().emit(Block.EVENTS.FLOW_CDUNM);
+
+    Object.values(this.children).forEach((child) =>{
+      if (child instanceof Block) {
+        child.dispatchComponentDidMount();
+      } else if (Array.isArray(child)) {
+        child.forEach((c) => {
+          if (child instanceof Block) {
+            c.dispatchComponentDidUnmount();
+          }
+        });
+      }
+    });
   }
 }
 

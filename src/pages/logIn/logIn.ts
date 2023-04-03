@@ -1,5 +1,5 @@
 import {Form} from '../../components/form/form';
-import Block from '../../utils/Block';
+import Block from '../../services/Block';
 import template from './logIn.hbs';
 
 interface LogInPageProps {
@@ -14,6 +14,10 @@ export class LogInPage extends Block<LogInPageProps> {
 
   init() {
     this.element?.classList.add('flex-wrapper');
+  }
+
+  show() {
+    this.getContent()!.style.display = 'flex';
   }
 
   render() {
