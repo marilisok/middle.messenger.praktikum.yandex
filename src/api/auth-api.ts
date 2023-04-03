@@ -1,5 +1,5 @@
 import {BaseAPI} from './base-api';
-import {SignInData, SignUpData, User} from './interfaces/auth-interfaces';
+import {SignInData, SignUpData} from './interfaces/auth-interfaces';
 
 export class AuthAPI extends BaseAPI {
   constructor() {
@@ -18,7 +18,7 @@ export class AuthAPI extends BaseAPI {
     return this.http.post('/logout');
   }
 
-  getUser(): Promise<User> {
+  getUser() {
     return this.http.get('/user');
   }
 }

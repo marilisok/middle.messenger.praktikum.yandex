@@ -1,13 +1,20 @@
 import {User} from '../api/interfaces/auth-interfaces';
+import {ChatModel} from '../api/interfaces/chat-interfaces';
+import {Message} from '../controllers/MessagesController';
 import {set} from '../utils/helpers';
 import {EventBus} from './EventBus';
 
-export interface State{
-    user?: User;
+export interface State {
+  chats?: ChatModel[];
+  user?: User;
+  selectedChat?: ChatModel | null;
+  isChatsLoading?: boolean;
+  isUserLoading?: boolean;
+  messages?: Record<number, Message[]>;
 }
 
-export enum StoreEvents{
-    Updated = 'updated'
+export enum StoreEvents {
+  Updated = 'updated',
 }
 
 class Store extends EventBus {
@@ -15,7 +22,6 @@ class Store extends EventBus {
 
   set(path: string, value: unknown) {
     set(this.state, path, value);
-
     this.emit(StoreEvents.Updated, this.state);
   }
 

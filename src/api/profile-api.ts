@@ -11,8 +11,8 @@ export class ProfileAPI extends BaseAPI {
     return this.http.put('/profile', {data});
   }
 
-  changeUserAvatar() {
-
+  changeUserAvatar(data: FormData) {
+    return this.http.put('/profile/avatar', {data});
   }
 
   changeUserPassword(data: PasswordRequest) {
@@ -23,7 +23,7 @@ export class ProfileAPI extends BaseAPI {
     return this.http.get(`${id}`);
   }
 
-  searchUserByLogin(data: string) {
-    return this.http.post('/search', {data});
+  searchUserByLogin(login: string) {
+    return this.http.post('/search', {data: {login}});
   }
 }

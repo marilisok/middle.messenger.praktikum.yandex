@@ -28,7 +28,8 @@ class Route {
 
   leave() {
     if (this._block) {
-      this._block.hide();
+      this._block?.dispatchComponentDidUnmount();
+      this._block = null;
     }
   }
 
@@ -40,10 +41,7 @@ class Route {
     if (!this._block) {
       this._block = this._blockClass;
       renderDOM(this._props.rootQuery, this._block!);
-      return;
     }
-
-    this._block.show();
   }
 }
 export default Route;

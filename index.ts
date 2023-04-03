@@ -6,7 +6,7 @@ import {chatsContainer} from './src/pages/chats/chatsContainer';
 import {router} from './src/services/Router';
 import {profileContainer} from './src/pages/profile/profileContainer';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
   router
       .use('/', logInContainer())
       .use('/sign-up', signInContainer())

@@ -6,8 +6,11 @@ import {Avatar} from '../../components/avatar/avatar';
 import {ChangePassword} from './components/change-password/change-password';
 import {Form} from '../../components/form/form';
 import {connect} from '../../hocs/connect';
-import {State} from '../../services/Store';
+import {PopUp} from '../../components/popup/popup';
+import {getAvatar} from '../../utils/getAvatar';
+import AuthController from '../../controllers/AuthController';
 import {InputContainer} from '../../components/input/inputContainer';
+import {User} from '../../api/interfaces/auth-interfaces';
 
 interface ProfilePageProps {
   avatar: Avatar;
@@ -18,7 +21,11 @@ interface ProfilePageProps {
   buttons?: Button[];
   profileForm?: Form | null;
   changePassword?: ChangePassword | null;
-  test?: ProfileInfoItem;
+  changeAvatarPopup: PopUp;
+  backToProfileButton: Button;
+  user?: User;
+  isUserLoading?: boolean;
+  login?: string;
 }
 
 class ProfilePageBase extends Block<ProfilePageProps> {
@@ -27,6 +34,7 @@ class ProfilePageBase extends Block<ProfilePageProps> {
   }
 
   init() {
+    AuthController.fetchUser();
     this.element?.classList.add('flex-row');
   }
 
@@ -35,30 +43,21 @@ class ProfilePageBase extends Block<ProfilePageProps> {
   }
 
   protected componentDidUpdate(oldProps: ProfilePageProps, newProps: ProfilePageProps): boolean {
-    if (this.children.profileInfoItems) {
-      this.children.profileInfoItems = this.children.profileInfoItems.map((element) => {
-        const fieldName = element.props.field;
-        return new ProfileInfoItem({
-          ...element.props,
-          value: newProps[fieldName],
-        });
+    this.children.avatar.setProps({
+      src: getAvatar(newProps.user?.avatar || ''),
+    });
+    if (this.props.isProfileInfo && newProps.user) {
+      const profileInfoItems = this.props.profileInfoItems;
+      profileInfoItems?.forEach((element: ProfileInfoItem) => {
+        const field = element.getProps().field;
+        element.setProps({value: newProps.user[field] || ''});
       });
     }
 
-    if (this.children.profileForm) {
-      //debugger;
-      const inputs = this.children.profileForm.children.inputs.map((element) => {
-        const fieldName = element.props.name;
-        return new InputContainer({
-          ...element.props,
-          value: newProps[fieldName],
-        });
-      });
-      // this.children.profileForm.children.inputs = inputs
-      this.children.profileForm = new Form({
-        inputs: inputs,
-        buttons: this.children.profileForm.children.buttons,
-        events: this.children.profileForm.props.events,
+    if (this.children.profileForm && newProps.user) {
+      const profileFormInputs = this.children.profileForm.children.inputs as unknown as InputContainer[];
+      profileFormInputs.forEach((element: InputContainer) => {
+        element.setProps({value: newProps.user[element.props.name] || ''});
       });
     }
     return true;
@@ -69,6 +68,8 @@ class ProfilePageBase extends Block<ProfilePageProps> {
   }
 }
 
-export const ProfilePage = connect((state: State) => {
-  return state.user || {};
-})(ProfilePageBase);
+export const ProfilePage = connect((state) => ({
+  user: state.user,
+  isUserLoading: state.isUserLoading,
+  login: state.user?.login || '',
+}))(ProfilePageBase);

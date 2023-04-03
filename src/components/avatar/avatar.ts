@@ -4,6 +4,9 @@ import Block from '../../services/Block';
 interface AvatarProps {
   src: string;
   className: string;
+  events?: {
+    click: (event?: any) => void;
+  };
 }
 
 export class Avatar extends Block<AvatarProps> {

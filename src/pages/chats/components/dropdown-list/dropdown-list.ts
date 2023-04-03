@@ -3,13 +3,13 @@ import {PopUp} from '../../../../components/popup/popup';
 import Block from '../../../../services/Block';
 import template from './dropdown-list.hbs';
 
-interface DropDownListeProps {
+interface DropDownListProps {
   buttons: Button[];
   popups?: PopUp[];
 }
 
-export class DropDownList extends Block<DropDownListeProps> {
-  constructor(props: DropDownListeProps) {
+export class DropDownList extends Block<DropDownListProps> {
+  constructor(props: DropDownListProps) {
     super('div', props);
   }
 

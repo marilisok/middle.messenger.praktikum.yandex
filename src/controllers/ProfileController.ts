@@ -1,6 +1,7 @@
 import {User} from '../api/interfaces/auth-interfaces';
 import {PasswordRequest} from '../api/interfaces/profile-interfaces';
 import {ProfileAPI} from '../api/profile-api';
+import store from '../services/Store';
 
 class ProfileController {
   private api: ProfileAPI;
@@ -10,11 +11,23 @@ class ProfileController {
   }
 
   async changeUserProfile(data: User) {
-    await this.api.changeUserProfile(data);
+    store.set('isUserLoading', true);
+    await this.api.changeUserProfile(data).then((res: XMLHttpRequest) => {
+      if (res.status === 200) {
+        store.set('user', res.response);
+        store.set('isUserLoading', false);
+      }
+    });
   }
 
-  async changeUserAvatar() {
-
+  async changeUserAvatar(data: FormData) {
+    store.set('isUserLoading', true);
+    await this.api.changeUserAvatar(data).then((res: XMLHttpRequest) => {
+      if (res.status === 200) {
+        store.set('user', res.response);
+        store.set('isUserLoading', false);
+      }
+    });
   }
 
   async changeUserPassword(data: PasswordRequest) {
@@ -26,7 +39,7 @@ class ProfileController {
   }
 
   async searchUserByLogin(data: string) {
-    await this.api.searchUserByLogin(data);
+    return await this.api.searchUserByLogin(data);
   }
 }
 export default new ProfileController();

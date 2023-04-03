@@ -1,5 +1,4 @@
 import Block from '../../../../services/Block';
-import store from '../../../../services/Store';
 import template from './profile-info-item.hbs';
 
 interface ProfileInfoItemProps {

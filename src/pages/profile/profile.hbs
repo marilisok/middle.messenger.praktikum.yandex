@@ -1,24 +1,31 @@
+{{{changeAvatarPopup}}}
 <div class="back flex-wrapper">
     {{{backToChatsButton}}}
 </div>
 <div class="flex-wrapper profile-info">
-    <div class="avatar-wrapper">
-        {{{avatar}}}
-        <div class="user-name">Name</div>
-    </div>
-    <div class="flex profile-fields">
-        {{#if isProfileInfo}}
-            {{{profileInfoItems}}}
-        {{else if isChangePassword}}
-            {{{changePassword}}}
-        {{else}}
-             {{{profileForm}}} 
-        {{/if}}
-    </div>
+    {{#unless isUserLoading}}
+        <div class="avatar-wrapper">
+                {{{avatar}}}
+                <div class="user-name">{{{login}}}</div>
+        </div>
+        <div class="flex profile-fields">
+                {{#if isProfileInfo}}
+                    {{{profileInfoItems}}}
+                {{else if isChangePassword}}
+                    {{{changePassword}}}
+                    {{{backToProfileButton}}}
+                {{else}}
+                    {{{profileForm}}}
+                    {{{backToProfileButton}}}
+                {{/if}}
+        </div>
         <div class="flex">
             {{#if isProfileInfo}}
                 {{{buttons}}}
             {{/if}}
         </div>
-    
+    {{/unless}}
+    {{#if isUserLoading}}
+        Загрузка...
+    {{/if}}
 </div>

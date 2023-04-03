@@ -34,9 +34,6 @@ export class Form extends Block<FormProps> {
   }
 
   getForm() {
-    this.children.inputs.forEach((element) => {
-      console.log(element.value);
-    });
     const inputs = Array.from(this.element!.querySelectorAll('input'));
     const formObj = inputs?.reduce((result, item) => {
       const key = item.name;

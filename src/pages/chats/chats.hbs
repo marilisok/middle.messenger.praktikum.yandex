@@ -1,30 +1,39 @@
-{{{menuList}}}
-{{{attachList}}}
-<div class="chats-list">
-    <div>
-        {{{profileButton}}}
-    </div>
-    <div class="search-button-wrapper">
-        {{{searchInput}}}
-    </div>
-    {{{chatItems}}}
-    </div>
-    <div class="chat-side">
-        <div class="chat-menu">
-            <div class="flex-row">
-                <div class="menu-avatar">{{{avatar}}}</div>
-                <div class="name">{{{name}}}</div>
+{{#if userId}}
+        {{{menuList}}}
+        {{{createChatPopup}}}
+        <div class="chats-list">
+            <div class="left-menu-buttons">
+                {{{createChatButton}}}
+                {{{profileButton}}}
             </div>
-            {{{menuButton}}}
+            {{#unless isChatsLoading}}  
+                {{{chatItems}}}
+            {{/unless}}
+            {{#if isChatsLoading}}  
+                Загрузка...
+            {{/if}}
         </div>
-        <div class="chat-dialog">
-            <div class="dialog-time">{{{dialogTime}}}</div>
-            {{{messages}}}
+        <div class="chat-side">
+            {{#if isChatSideShown}}
+                <div class="chat-menu">
+                    <div class="flex-row">
+                        <div class="menu-avatar">{{{avatar}}}</div>
+                        <div class="name">{{{name}}}</div>
+                    </div>
+                    {{{menuButton}}}
+                </div>
+                <div class="chat-dialog">
+                    {{{messageWrapper}}}
+                </div>
+                <div class="chat-message">
+                    <div class="message-input-wrapper">{{{messageInput}}}</div>
+                    <div>{{{sendMessageButton}}}</div>
+                </div>
+            {{else}}
+                <h3 class="flex-wrapper">Выберите или создайте чат</h3>
+            {{/if}}
         </div>
-        <div class="chat-message">
-            <div>{{{attachmentButton}}}</div>
-            <div class="message-input-wrapper">{{{messageInput}}}</div>
-            <div>{{{sendMessageButton}}}</div>
-        </div>
-    </div>
-</div>
+{{/if}}
+{{!-- {{#if isChatsLoading}}
+    Загрузка...
+{{/if}} --}}

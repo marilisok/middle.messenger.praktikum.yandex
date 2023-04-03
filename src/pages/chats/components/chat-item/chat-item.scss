@@ -2,6 +2,7 @@
     border-top: 1px solid $gray-border-color;
     padding: 10px;
     display: flex;
+    cursor: pointer;
 }
 
 .message-avatar-wrapper{
@@ -27,7 +28,7 @@
 .chat-message-wrapper{
     display: flex;
     flex-direction: column;
-    width: 80%;
+    width: 65%;
     gap: 5px;
 }
 
@@ -39,4 +40,9 @@
 
 .message, .message-time{
     color: $gray;
+}
+
+.message-wrapper{
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
