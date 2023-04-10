@@ -109,7 +109,6 @@ export const ChatsPage = connect((state) => {
       messages: [],
     };
   }
-  const messages = state.messages[selectedChatId].map((message: Message) => deepCopy(message));
   const chats = state.chats.map((chat: ChatModel) => deepCopy(chat));
   return {
     avatar: new Avatar({
@@ -118,10 +117,10 @@ export const ChatsPage = connect((state) => {
     }),
     isChatSideShown: true,
     name: selectedChat.title,
-    chats: chats,
+    chats,
     isChatsLoading: state.isChatsLoading,
     selectedChat: state.selectedChat,
     userId: state.user?.id,
-    messages: messages,
+    messages: state.messages[selectedChatId],
   };
 })(ChatsPageBase);

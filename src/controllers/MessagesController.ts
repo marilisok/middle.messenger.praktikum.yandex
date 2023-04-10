@@ -71,6 +71,7 @@ class MessagesController {
     } else {
       store.set(storeKey, [...oldMessages, messages]);
     }
+    //  Для того, чтобы последнее сообщение в списке чатов обновлялось
     ChatsController.getChats();
   }
 

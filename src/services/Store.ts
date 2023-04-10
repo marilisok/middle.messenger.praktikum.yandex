@@ -1,5 +1,6 @@
 import {User} from '../api/interfaces/auth-interfaces';
 import {ChatModel} from '../api/interfaces/chat-interfaces';
+import {ErrorBase} from '../api/interfaces/error-interface';
 import {Message} from '../controllers/MessagesController';
 import {set} from '../utils/helpers';
 import {EventBus} from './EventBus';
@@ -11,6 +12,7 @@ export interface State {
   isChatsLoading?: boolean;
   isUserLoading?: boolean;
   messages?: Record<number, Message[]>;
+  error?: ErrorBase;
 }
 
 export enum StoreEvents {
