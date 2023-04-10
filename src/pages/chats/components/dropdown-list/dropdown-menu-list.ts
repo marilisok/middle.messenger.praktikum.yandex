@@ -17,6 +17,9 @@ export const dropDownMenuList = () => {
     className: 'close',
     events: {
       click: () => {
+        addUserByLogin.setValue('');
+        const newUsersList = new UsersList({usersList: []});
+        addUserPopup.setProps({usersList: newUsersList});
         addUserPopup.hide();
       },
     },
@@ -109,7 +112,7 @@ export const dropDownMenuList = () => {
           const newUsersList = new UsersList({usersList: []});
           addUserPopup.setProps({usersList: newUsersList});
         } else {
-          debounce(searchUsers(value));
+          debounce(searchUsers(value), 1000);
         }
       },
     },

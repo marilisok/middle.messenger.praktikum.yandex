@@ -12,6 +12,7 @@ import {ChatItems} from './components/chat-items/chat-items';
 import {MessageWrapper} from './components/messages-wrapper/messages-wrapper';
 import MessagesController from '../../controllers/MessagesController';
 import store from '../../services/Store';
+import {Input} from '../../components/input/input';
 
 export const chatsContainer = () => {
   const menuList = dropDownMenuList();
@@ -90,6 +91,8 @@ export const chatsContainer = () => {
         if (chatId) {
           const value = messageInput.value;
           MessagesController.sendMessage(chatId, value);
+          const input = messageInput.children.input as unknown as Input;
+          input.setValue('');
         }
       },
     },
