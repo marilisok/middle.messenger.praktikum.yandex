@@ -1,9 +1,12 @@
 import template from './avatar.hbs';
-import Block from '../../utils/Block';
+import Block from '../../services/Block';
 
 interface AvatarProps {
   src: string;
   className: string;
+  events?: {
+    click: (event?: any) => void;
+  };
 }
 
 export class Avatar extends Block<AvatarProps> {
@@ -15,4 +18,3 @@ export class Avatar extends Block<AvatarProps> {
     return this.compile(template, this.props);
   }
 }
-

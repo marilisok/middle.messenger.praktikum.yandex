@@ -1,9 +1,10 @@
-import Block from '../../../../utils/Block';
+import Block from '../../../../services/Block';
 import template from './profile-info-item.hbs';
 
 interface ProfileInfoItemProps {
   text: string;
   value: string;
+  field: string;
 }
 
 export class ProfileInfoItem extends Block<ProfileInfoItemProps> {

@@ -3,6 +3,9 @@ import {Form} from '../../components/form/form';
 import {InputContainer} from '../../components/input/inputContainer';
 import {SignInPage} from './signIn';
 import {FieldsName} from '../../utils/FieldsName';
+import {router} from '../../services/Router';
+import AuthController from '../../controllers/AuthController';
+import {SignUpData} from '../../api/interfaces/auth-interfaces';
 
 export const signInContainer = () => {
   const emailInput = new InputContainer({
@@ -65,7 +68,7 @@ export const signInContainer = () => {
     label: 'Войти',
     className: 'link',
     events: {
-      click: () => window.location.replace('logIn'),
+      click: () => router.go('/'),
     },
   });
 
@@ -83,11 +86,10 @@ export const signInContainer = () => {
     events: {
       submit: (event) => {
         event.preventDefault();
-        const formObj = form.getForm();
-        console.log(formObj);
+        const formObj = form.getForm() as unknown as SignUpData;
         const isFormInValid = form.isFormInValid();
         if (!isFormInValid) {
-          window.location.replace('chats');
+          AuthController.signUp(formObj);
         }
       },
     },

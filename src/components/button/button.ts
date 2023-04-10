@@ -1,5 +1,5 @@
 import template from './button.hbs';
-import Block from '../../utils/Block';
+import Block from '../../services/Block';
 
 interface ButtonProps {
   label?: string;
@@ -7,7 +7,7 @@ interface ButtonProps {
   img?: string;
   attr?: {
     type?: string;
-  }
+  };
   events?: {
     click: (event?: any) => void;
   };
