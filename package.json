@@ -13,7 +13,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm-run-all lint"
+      "pre-commit": "npm-run-all test lint"
     }
   },
   "repository": {
