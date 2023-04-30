@@ -9,12 +9,9 @@
     "start": "npm run build && npm run server",
     "lint:code": "node_modules/.bin/eslint . --fix",
     "lint:styles": "node_modules/.bin/stylelint \"**/*.scss\" --fix",
-    "lint": "npm-run-all lint:*"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm-run-all test lint"
-    }
+    "lint": "npm-run-all lint:*",
+    "prepare": "husky install",
+    "test": ""
   },
   "repository": {
     "type": "git",
