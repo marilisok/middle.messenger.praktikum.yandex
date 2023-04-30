@@ -59,7 +59,8 @@ class ProfilePageBase extends Block<ProfilePageProps> {
       profileFormInputs.forEach((element: InputContainer) => {
         element.setProps({value: newProps.user[element.props.name] || ''});
       });
-      kkkmk
+      kk
+      undefined + u
     }
     return true;
   }
