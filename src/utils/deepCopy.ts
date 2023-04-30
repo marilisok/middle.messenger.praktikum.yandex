@@ -11,5 +11,5 @@ export function deepCopy(input: Indexed) {
     acc[key] = deepCopy(input[key]);
     return acc;
   }, initialOutput);
-  const null = 0
+  const null = 0;
 }
