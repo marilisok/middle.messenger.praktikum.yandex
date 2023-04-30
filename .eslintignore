@@ -3,4 +3,5 @@
 **/*.min.js
 /node_modules 
 .parcel-cache/
-server.ts
+server.js
+webpack.config.js

@@ -42,7 +42,7 @@ class ProfilePageBase extends Block<ProfilePageProps> {
     this.getContent()!.style.display = 'flex';
   }
 
-  protected componentDidUpdate(oldProps: ProfilePageProps, newProps: ProfilePageProps): boolean {
+  protected componentDidUpdate(newProps: ProfilePageProps): boolean {
     this.children.avatar.setProps({
       src: getAvatar(newProps.user?.avatar || ''),
     });
@@ -72,4 +72,4 @@ export const ProfilePage = connect((state) => ({
   user: state.user,
   isUserLoading: state.isUserLoading,
   login: state.user?.login || '',
-}))(ProfilePageBase);
+}))(ProfilePageBase as unknown as typeof Block);

@@ -24,7 +24,7 @@ export class PopUp extends Block<PopUpProps> {
     this.hide();
   }
 
-  protected componentDidUpdate(oldProps: PopUpProps, newProps: PopUpProps): boolean {
+  protected componentDidUpdate(newProps: PopUpProps): boolean {
     this.children.usersList?.setProps({
       usersList: newProps.usersList,
     });

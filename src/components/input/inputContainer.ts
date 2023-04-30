@@ -38,10 +38,10 @@ export class InputContainer extends Block<InputContainerProps> {
   }
 
   get value() {
-    return this.children.input.value;
+    return (this.children.input as unknown as Input).value;
   }
 
-  protected componentDidUpdate(oldProps: InputContainerProps, newProps: InputContainerProps): boolean {
+  protected componentDidUpdate(newProps: InputContainerProps): boolean {
     this.children.input.setProps({
       attr: {
         value: newProps.value,

@@ -147,8 +147,8 @@ class Block<Props extends object> {
       if (child instanceof Block) {
         child.dispatchComponentDidMount();
       } else if (Array.isArray(child)) {
-        child.forEach((c) => {
-          if (child instanceof Block) {
+        (child as any[]).forEach((c) => {
+          if (c instanceof Block) {
             c.dispatchComponentDidMount();
           }
         });
@@ -162,7 +162,7 @@ class Block<Props extends object> {
     }
   }
 
-  protected componentDidUpdate(oldProps: Props, newProps: Props) {
+  protected componentDidUpdate(_oldProps: Props, _newProps: Props) {
     return true;
   }
 
@@ -301,8 +301,8 @@ class Block<Props extends object> {
       if (child instanceof Block) {
         child.dispatchComponentDidMount();
       } else if (Array.isArray(child)) {
-        child.forEach((c) => {
-          if (child instanceof Block) {
+        (child as any[]).forEach((c) => {
+          if (c instanceof Block) {
             c.dispatchComponentDidUnmount();
           }
         });

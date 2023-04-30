@@ -11,6 +11,7 @@ import AuthController from '../../controllers/AuthController';
 import ProfileController from '../../controllers/ProfileController';
 import {PopUp} from '../../components/popup/popup';
 import {InputContainer} from '../../components/input/inputContainer';
+import {User} from '../../api/interfaces/auth-interfaces';
 
 export const profileContainer = () => {
   const buttons = [];
@@ -48,9 +49,10 @@ export const profileContainer = () => {
         event.preventDefault();
         const form = changeAvatarForm.getContent() as HTMLFormElement;
         const formData = new FormData(form);
-        if (form.querySelector('.avatarInput').value) {
+        const avatarInput = (form.querySelector('.avatarInput') as HTMLInputElement);
+        if (avatarInput.value) {
           ProfileController.changeUserAvatar(formData);
-          form.querySelector('.avatarInput').value = '';
+          avatarInput.value = '';
           changeAvatarPopup.hide();
         }
       },
@@ -114,7 +116,7 @@ export const profileContainer = () => {
         const formObj = profileForm.getForm();
         const isFormInValid = profileForm.isFormInValid();
         if (!isFormInValid) {
-          ProfileController.changeUserProfile(formObj);
+          ProfileController.changeUserProfile(formObj as unknown as User);
           profile.setProps({
             isProfileInfo: true,
           });

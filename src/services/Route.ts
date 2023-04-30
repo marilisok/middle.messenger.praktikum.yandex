@@ -1,5 +1,4 @@
 import Block from './Block';
-import {isEqual} from '../utils/isEqual';
 import {renderDOM} from '../utils/renderDOM';
 
 export interface RouteProps {
@@ -34,7 +33,7 @@ class Route {
   }
 
   match(pathname: string) {
-    return isEqual(pathname, this._pathname);
+    return pathname.localeCompare(this._pathname) === 0;
   }
 
   render() {

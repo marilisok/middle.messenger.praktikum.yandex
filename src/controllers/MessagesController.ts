@@ -64,7 +64,7 @@ class MessagesController {
       return;
     }
 
-    const oldMessages = store.getState().messages[id];
+    const oldMessages = store.getState().messages![id];
 
     if (!oldMessages) {
       store.set(storeKey, [messages]);
