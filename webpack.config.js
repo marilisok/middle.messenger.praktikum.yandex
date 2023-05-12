@@ -25,10 +25,11 @@ module.exports = {
       {
         test: /\.hbs$/,
         loader: 'handlebars-loader',
+        exclude: /(node_modules)/
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [MiniCssExtractPlugin.loader, 'style-loader', 'css-loader', 'sass-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(png|svg|jpg|gif|woff(2)?|eot|ttf|otf)$/i,
@@ -51,6 +52,6 @@ module.exports = {
     open: true,
     compress: true,
     hot: true,
-    port: 4000
-  }
+    port: 3000
+  },
 };

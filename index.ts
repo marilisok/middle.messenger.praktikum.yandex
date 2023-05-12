@@ -1,3 +1,4 @@
+import './static/styles/styles.scss';
 import {logInContainer} from './src/pages/logIn/logInContainer';
 import {signInContainer} from './src/pages/signIn/signInContainer';
 import {chatsContainer} from './src/pages/chats/chatsContainer';

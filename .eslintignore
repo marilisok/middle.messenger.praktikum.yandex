@@ -2,6 +2,6 @@
 /dist
 **/*.min.js
 /node_modules 
-.parcel-cache/
 server.js
 webpack.config.js
+mochaSetup.js

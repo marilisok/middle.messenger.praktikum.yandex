@@ -49,15 +49,18 @@ class ProfilePageBase extends Block<ProfilePageProps> {
     if (this.props.isProfileInfo && newProps.user) {
       const profileInfoItems = this.props.profileInfoItems;
       profileInfoItems?.forEach((element: ProfileInfoItem) => {
-        const field = element.getProps().field;
-        element.setProps({value: newProps.user[field] || ''});
+        const field = element.getProps().field as keyof User;
+        const newUser = newProps.user!;
+        element.setProps({value: newUser[field] || ''});
       });
     }
 
     if (this.children.profileForm && newProps.user) {
       const profileFormInputs = this.children.profileForm.children.inputs as unknown as InputContainer[];
       profileFormInputs.forEach((element: InputContainer) => {
-        element.setProps({value: newProps.user[element.props.name] || ''});
+        const field = element.getProps().name as keyof User;
+        const newUser = newProps.user!;
+        element.setProps({value: newUser[field] || ''});
       });
     }
     return true;
