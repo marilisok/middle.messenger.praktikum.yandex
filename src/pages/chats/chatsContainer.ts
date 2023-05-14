@@ -91,7 +91,7 @@ export const chatsContainer = () => {
         if (chatId) {
           const value = messageInput.value;
           MessagesController.sendMessage(chatId, value);
-          const input = messageInput.children.input as unknown as Input;
+          const input = messageInput.children.inputField as unknown as Input;
           input.setValue('');
         }
       },
