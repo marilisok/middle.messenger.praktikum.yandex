@@ -9,6 +9,7 @@
 ## Ссылка на приложение
 
 [Netlify](https://ubiquitous-semolina-b24042.netlify.app/)
+[Яндекс облако](https://bbaq6j0oa1i7bbvdt8lh.containers.yandexcloud.net/)
 
 ## Спринт 1
 
