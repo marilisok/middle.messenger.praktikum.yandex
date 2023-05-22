@@ -6,6 +6,7 @@ import {Button} from '../../../../components/button/button';
 import {Form} from '../../../../components/form/form';
 import {router} from '../../../../services/Router';
 import ProfileController from '../../../../controllers/ProfileController';
+import {PasswordRequest} from '../../../../api/interfaces/profile-interfaces';
 
 export class ChangePassword extends Block<any> {
   constructor() {
@@ -55,7 +56,7 @@ export class ChangePassword extends Block<any> {
           const formObj = form.getForm();
           const isFormInValid = form.isFormInValid();
           if (!isFormInValid) {
-            ProfileController.changeUserPassword(formObj);
+            ProfileController.changeUserPassword(formObj as unknown as PasswordRequest);
             router.go('/settings');
           }
         },

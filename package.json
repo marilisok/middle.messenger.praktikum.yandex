@@ -3,10 +3,15 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "parcel ./static/index.html --open --port 3000 --no-cache",
-    "build": "parcel build ./static/index.html --no-cache",
-    "server": "node server.ts",
-    "start": "npm run build && npm run server"
+    "dev": "webpack serve",
+    "build": "webpack",
+    "server": "node server.js",
+    "start": "npm run build && npm run server",
+    "lint:code": "node_modules/.bin/eslint . --fix",
+    "lint:styles": "node_modules/.bin/stylelint \"**/*.scss\" --fix",
+    "lint": "npm-run-all lint:*",
+    "prepare": "husky install",
+    "test": "mocha --require ts-node/register --require ./mochaSetup.js './src/**/*.test.ts'"
   },
   "repository": {
     "type": "git",
@@ -17,21 +22,40 @@
   "dependencies": {
     "express": "4.18.2",
     "handlebars": "4.7.7",
-    "nanoid": "4.0.1",
+    "jsdom": "21.1.1",
+    "nanoid": "3.3.4",
     "scss": "0.2.4"
   },
   "devDependencies": {
-    "@anikin/parcel-transformer-handlebars": "1.0.9",
-    "@anikin/parcel-transformer-handlebars-precompile": "1.0.1",
-    "@parcel/transformer-sass": "2.8.3",
+    "@types/chai": "4.3.5",
+    "@types/jsdom": "21.1.1",
+    "@types/mocha": "10.0.1",
+    "@types/sinon": "10.0.14",
     "@typescript-eslint/eslint-plugin": "5.48.2",
     "@typescript-eslint/parser": "5.48.2",
+    "ajv": "7.2.4",
+    "chai": "4.3.7",
+    "css-loader": "6.7.3",
     "eslint": "8.32.0",
     "eslint-config-google": "0.14.0",
-    "parcel": "2.8.3",
+    "handlebars-loader": "1.7.3",
+    "html-webpack-plugin": "5.5.1",
+    "husky": "8.0.3",
+    "mini-css-extract-plugin": "2.7.5",
+    "mocha": "10.2.0",
+    "npm-run-all": "4.1.5",
+    "sass": "1.62.1",
+    "sass-loader": "13.2.2",
+    "sinon": "15.0.4",
+    "style-loader": "3.3.2",
     "stylelint": "15.2.0",
     "stylelint-config-standard": "30.0.1",
-    "stylelint-config-standard-scss": "^7.0.1",
-    "typescript": "4.7.4"
+    "stylelint-config-standard-scss": "7.0.1",
+    "ts-loader": "9.4.2",
+    "ts-node": "10.9.1",
+    "typescript": "4.7.4",
+    "webpack": "5.77.0",
+    "webpack-cli": "5.0.1",
+    "webpack-dev-server": "4.13.2"
   }
 }

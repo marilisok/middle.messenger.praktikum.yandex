@@ -7,8 +7,9 @@ export function deepCopy(input: Indexed) {
 
   const initialOutput = Array.isArray(input) ? [] : {};
 
-  return Object.keys(input).reduce((acc, key) => {
+  return Object.keys(input).reduce((acc: any, key: any) => {
     acc[key] = deepCopy(input[key]);
     return acc;
   }, initialOutput);
 }
+

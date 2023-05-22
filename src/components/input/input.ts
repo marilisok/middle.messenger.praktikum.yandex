@@ -21,7 +21,7 @@ export class Input extends Block<InputProps> {
   }
 
   get value() {
-    return this.element!.value;
+    return (this.element as HTMLInputElement).value;
   }
 
   public setValue(value: string) {

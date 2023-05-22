@@ -12,45 +12,58 @@ class ChatsController {
   }
 
   async getChats() {
-    store.set('isChatsLoading', true);
-    const res = await this.api.getChats();
-    if ( res.status === 200 ) {
-      store.set('chats', res.response);
-      const chats = res.response;
-      chats.forEach(async (chat: ChatModel) => {
-        const token = await this.getToken(chat.id);
-        if (token) {
-          await MessagesController.connect(chat.id, token);
-        }
-      });
-    } else {
-      store.set('error', {status: res.status, reason: res.response.reason});
-      router.go('/error');
+    try {
+      store.set('isChatsLoading', true);
+      const res = await this.api.getChats();
+      if ( res.status === 200 ) {
+        store.set('chats', res.response);
+        const chats = res.response;
+        chats.forEach(async (chat: ChatModel) => {
+          const token = await this.getToken(chat.id);
+          if (token) {
+            await MessagesController.connect(chat.id, token);
+          }
+        });
+      } else {
+        store.set('error', {status: res.status, reason: res.response.reason});
+        router.go('/error');
+      }
+    } catch (e: any) {
+      store.set('error', {reason: e?.reason});
+    } finally {
+      store.set('isChatsLoading', false);
     }
-    store.set('isChatsLoading', false);
   }
 
   async createChat(title: string) {
-    const res = await this.api.createChat(title);
-    if ( res.status === 200 ) {
-      this.getChats();
-    } else {
-      store.set('error', {status: res.status, reason: res.response.reason});
-      router.go('/error');
+    try {
+      const res = await this.api.createChat(title);
+      if ( res.status === 200 ) {
+        this.getChats();
+      } else {
+        store.set('error', {status: res.status, reason: res.response.reason});
+        router.go('/error');
+      }
+    } catch (e: any) {
+      store.set('error', {reason: e?.reason});
     }
   }
 
   async deleteChat(chatId: number) {
-    const res = await this.api.deleteChat(chatId);
-    if ( res.status === 200 ) {
-      store.set('selectedChat', null);
-      MessagesController.onClose(chatId);
-      const messages = store.getState().messages as Record<number, Message[]>;
-      delete messages[chatId];
-      this.getChats();
-    } else {
-      store.set('error', {status: res.status, reason: res.response.reason});
-      router.go('/error');
+    try {
+      const res = await this.api.deleteChat(chatId);
+      if ( res.status === 200 ) {
+        store.set('selectedChat', null);
+        MessagesController.onClose(chatId);
+        const messages = store.getState().messages as Record<number, Message[]>;
+        delete messages[chatId];
+        this.getChats();
+      } else {
+        store.set('error', {status: res.status, reason: res.response.reason});
+        router.go('/error');
+      }
+    } catch (e: any) {
+      store.set('error', {reason: e?.reason});
     }
   }
 
@@ -59,19 +72,39 @@ class ChatsController {
   }
 
   async getUsersByChat(id: number) {
-    return await this.api.getUsersByChat(id);
+    let users;
+    try {
+      users = await this.api.getUsersByChat(id);
+    } catch (e: any) {
+      store.set('error', {reason: e?.reason});
+    }
+    return users;
   }
 
   async addUsersToChat(chatId: number, userId: number) {
-    await this.api.addUsersToChat(chatId, [userId]);
+    try {
+      await this.api.addUsersToChat(chatId, [userId]);
+    } catch (e: any) {
+      store.set('error', {reason: e?.reason});
+    }
   }
 
   async deleteUsersFromChat(chatId: number, userId: number) {
-    await this.api.deleteUsersFromChat(chatId, [userId]);
+    try {
+      await this.api.deleteUsersFromChat(chatId, [userId]);
+    } catch (e: any) {
+      store.set('error', {reason: e?.reason});
+    }
   }
 
   public getToken(id: number) {
-    return this.api.getToken(id);
+    let token;
+    try {
+      token = this.api.getToken(id);
+    } catch (e: any) {
+      store.set('error', {reason: e?.reason});
+    }
+    return token;
   }
 }
 

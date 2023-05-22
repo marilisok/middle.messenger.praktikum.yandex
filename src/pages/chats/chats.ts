@@ -51,7 +51,7 @@ class ChatsPageBase extends Block<ChatsPageProps> {
     this.getContent()!.style.display = 'flex';
   }
 
-  protected componentDidUpdate(oldProps: ChatsPageProps, newProps: ChatsPageProps): boolean {
+  protected componentDidUpdate(newProps: ChatsPageProps): boolean {
     if (!newProps.isChatsLoading) {
       const newChatItems = newProps.chats?.map((chat: ChatModel) => new ChatItem({
         avatar: new Avatar({
@@ -123,4 +123,4 @@ export const ChatsPage = connect((state) => {
     userId: state.user?.id,
     messages: state.messages[selectedChatId],
   };
-})(ChatsPageBase);
+})(ChatsPageBase as unknown as typeof Block);

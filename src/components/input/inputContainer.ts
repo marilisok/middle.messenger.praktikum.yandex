@@ -12,6 +12,7 @@ export interface InputContainerProps {
   isProfileMode?: boolean;
   text?: string;
   accept?: string;
+  inputField?: Input;
 }
 
 export class InputContainer extends Block<InputContainerProps> {
@@ -21,7 +22,7 @@ export class InputContainer extends Block<InputContainerProps> {
 
   init() {
     this.element?.classList.add('input-wrapper');
-    this.children.input = new Input({
+    const inputField = new Input({
       attr: {
         placeholder: this.props?.placeholder || '',
         class: this.props.className,
@@ -35,16 +36,17 @@ export class InputContainer extends Block<InputContainerProps> {
         focus: () => this.validateInput(),
       },
     });
+    this.setProps({inputField});
   }
 
   get value() {
-    return this.children.input.value;
+    return (this.children.inputField as unknown as Input).value;
   }
 
-  protected componentDidUpdate(oldProps: InputContainerProps, newProps: InputContainerProps): boolean {
-    this.children.input.setProps({
+  protected componentDidUpdate(newProps: InputContainerProps): boolean {
+    this.children.inputField.setProps({
       attr: {
-        value: newProps.value,
+        value: newProps?.value || '',
       },
     });
     return true;
